@@ -15,11 +15,14 @@ from pathlib import Path
 import shutil
 import uuid
 from typing import List
+from app.models.project import Project as ProjectModel
+import zipfile
 
 router = APIRouter()
 
 UPLOAD_DIRECTORY = "uploads/"
-GAUSSIAN_SPLATTING_DIRECTORY = "E:/Code/Python/SZU/gaussian-splatting"
+GAUSSIAN_SPLATTING_DIRECTORY = "/root/codes/gaussian-splatting/"
+GAUSTUDIO_DIRECTORY = "/root/codes/gaustudio/"
 
 # 创建线程池
 thread_pool = ThreadPoolExecutor(max_workers=3)
@@ -284,3 +287,59 @@ def run_task_in_thread(task_id: int, absolute_output_folder: str, input_video_pa
         db.commit()
     finally:
         db.close()
+
+@router.post("/threeDGS/toObj")
+def to_obj(project_id: int, db: Session = Depends(get_db)):
+    project = db.query(ProjectModel).filter(ProjectModel.id == project_id).first()
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    
+    processed_file = db.query(ProcessedFileModel).filter(ProcessedFileModel.id == project.processed_file_id).first()
+    if not processed_file:
+        raise HTTPException(status_code=404, detail="Processed file not found")
+
+    result_dir = os.path.join(processed_file.folder_path, "results")
+    result_dir_abs = os.path.abspath(result_dir)
+    result_camera_json = os.path.join(result_dir, "cameras.json")
+    result_camera_json_abs = os.path.abspath(result_camera_json)
+    mesh_obj_dir = os.path.join(processed_file.folder_path, "mesh", "obj")
+    mesh_obj_dir_abs = os.path.abspath(mesh_obj_dir)
+
+    # 创建目标目录如果不存在
+    os.makedirs(mesh_obj_dir_abs, exist_ok=True)
+
+    # 定义ZIP文件名和路径
+    zip_filename = f"{project.name}.zip"
+    zip_filepath = os.path.join(mesh_obj_dir_abs, zip_filename)
+
+    # 检查ZIP文件是否已存在
+    if os.path.exists(zip_filepath):
+        return FileResponse(zip_filepath, filename=zip_filename, media_type="application/octet-stream")
+
+    # 确保 cameras.json 在 /results 下
+    src_cameras = os.path.join(processed_file.folder_path, "cameras.json")
+    dest_cameras = os.path.join(result_dir_abs, "cameras.json")
+    if os.path.exists(src_cameras):
+        shutil.copy2(src_cameras, dest_cameras)
+    
+    extract_cmd = f"conda run -n gaustudio gs-extract-mesh -m \"{result_dir_abs}\" -s \"{result_camera_json_abs}\" -o \"{mesh_obj_dir_abs}\""
+    print(extract_cmd)
+    subprocess.run(extract_cmd, shell=True, cwd=GAUSTUDIO_DIRECTORY)
+    
+    texrecon_cmd = (
+        "conda run -n gaustudio "
+        "texrecon ./images ./fused_mesh.ply ./textured_mesh "
+        "--outlier_removal=gauss_clamping --data_term=area --no_intermediate_results"
+    )
+    subprocess.run(texrecon_cmd, shell=True, cwd=mesh_obj_dir_abs)
+    
+    # 创建ZIP文件
+    with zipfile.ZipFile(zip_filepath, "w", zipfile.ZIP_DEFLATED) as zipf:
+        for root, dirs, files in os.walk(mesh_obj_dir_abs):
+            for file in files:
+                if file.startswith("textured_mesh"):
+                    file_path = os.path.join(root, file)
+                    arcname = os.path.relpath(file_path, mesh_obj_dir_abs)
+                    zipf.write(file_path, arcname)
+    
+    return FileResponse(zip_filepath, filename=zip_filename, media_type="application/octet-stream")
