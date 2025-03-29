@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 
 # MySQL 数据库连接 URL
-DATABASE_URL = "mysql+mysqlconnector://root:root@192.168.1.4:3306/real_scene_data_engine"
+DATABASE_URL = "mysql+mysqlconnector://root:RealScene%402025%21@172.26.226.64:3306/real_scene_data_engine"
 
 # 创建数据库引擎，添加连接池配置
 engine = create_engine(

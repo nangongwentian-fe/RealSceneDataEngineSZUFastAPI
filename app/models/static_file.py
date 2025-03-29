@@ -12,3 +12,4 @@ class StaticFile(Base):
     processed_files = relationship("ProcessedFile", back_populates="static_file")
     data_resources = relationship("DataResource", back_populates="static_file")  # 添加这行
     projects = relationship("Project", back_populates="static_file")
+    projects = relationship("Project", foreign_keys="[Project.static_file_id]", back_populates="static_file")

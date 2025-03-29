@@ -5,8 +5,8 @@ from app.models.database import get_db
 from app.models.project import Project as ProjectModel
 from app.models.static_file import StaticFile as StaticFileModel
 from app.schemas.project import ProjectCreate, Project
-from app.routers.upload import create_three_dgs
-from app.models.processed_file import ProcessedFile as ProcessedFileModel
+from app.routers.three_d_gs import create_three_dgs
+from app.sse.connection_manager import manager
 
 router = APIRouter()
 
@@ -15,7 +15,13 @@ async def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
     # 检查 static_file 是否存在
     static_file = db.query(StaticFileModel).filter(StaticFileModel.id == project.static_file_id).first()
     if not static_file:
-        raise HTTPException(status_code=404, detail="Static file not found")
+        raise HTTPException(status_code=502, detail="Static file not found")
+    
+    # 检查 project_cover_image_static_id 是否存在
+    cover_image = db.query(StaticFileModel).filter(StaticFileModel.id == project.project_cover_image_static_id).first()
+    if not cover_image:
+        # 如果 cover_image 不存在，则使用 static_file 的第一个文件作为封面
+        raise HTTPException(status_code=502, detail="Cover image static file not found")
 
     # 执行 create_three_dgs 并获取 processed_file_id
     processed_file = await create_three_dgs(file_id=project.static_file_id, db=db)
@@ -25,11 +31,20 @@ async def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
     new_project = ProjectModel(
         name=project.name,
         processed_file_id=processed_file_id,
-        static_file_id=project.static_file_id
+        static_file_id=project.static_file_id,
+        project_cover_image_static_id=project.project_cover_image_static_id
     )
     db.add(new_project)
     db.commit()
     db.refresh(new_project)
+
+    # 发送通知
+    await manager.broadcast({
+        "type": "project_updated",
+        "action": "create",
+        "project_id": new_project.id
+    })
+
     return new_project
 
 @router.get("/projects/list")
@@ -45,8 +60,9 @@ def list_projects(
     # 构建返回结果
     result = []
     for project in projects:
-        static_file = db.query(StaticFileModel).filter(StaticFileModel.id == project.static_file_id).first()
-        processed_file = db.query(ProcessedFileModel).filter(ProcessedFileModel.id == project.processed_file_id).first()
+        static_file = project.static_file
+        processed_file = project.processed_file
+        cover_image = project.cover_image
 
         result.append({
             "id": project.id,
@@ -62,8 +78,14 @@ def list_projects(
                 "id": static_file.id if static_file else None,
                 "path": static_file.path if static_file else None,
                 "filename": static_file.filename if static_file else None,
-                "original_filename": static_file.original_filename if static_file else None
-            } if static_file else {}
+                "original_filename": static_file.original_filename if static_file else None,
+            } if static_file else {},
+            "cover_image": {
+                "id": cover_image.id if cover_image else None,
+                "path": cover_image.path if cover_image else None,
+                "filename": cover_image.filename if cover_image else None,
+                "original_filename": cover_image.original_filename if cover_image else None
+            } if cover_image else {}
         })
 
     return {
@@ -81,4 +103,9 @@ async def delete_project(project_id: int, db: Session = Depends(get_db)):
     # 删除项目
     db.delete(project)
     db.commit()
+    await manager.broadcast({
+        "type": "project_updated",
+        "action": "delete",
+        "project_id": project_id
+    })
     return True
