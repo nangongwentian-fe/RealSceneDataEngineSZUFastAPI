@@ -18,7 +18,7 @@ from app.sse.connection_manager import manager
 router = APIRouter()
 
 UPLOAD_DIRECTORY = "uploads/"
-GAUSSIAN_SPLATTING_DIRECTORY = "/workspace/gaussian-splatting/"
+GAUSSIAN_SPLATTING_DIRECTORY = "/workspace/gaussian-splatting"
 GAUSTUDIO_DIRECTORY = "/workspace/gaustudio/"
 
 # 创建线程池
@@ -291,3 +291,49 @@ def to_obj(project_id: int, db: Session = Depends(get_db)):
                     zipf.write(file_path, arcname)
     
     return FileResponse(zip_filepath, filename=zip_filename, media_type="application/octet-stream")
+
+@router.post("/threeDGS/toUrdf/{project_id}")
+def to_urdf(
+    project_id: int,
+    db: Session = Depends(get_db),
+):
+    project = db.query(ProjectModel).filter(ProjectModel.id == project_id).first()
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    processed_file = (
+        db.query(ProcessedFileModel)
+        .filter(ProcessedFileModel.id == project.processed_file_id)
+        .first()
+    )
+    if not processed_file:
+        raise HTTPException(status_code=404, detail="Processed file not found")
+
+    # 获取 obj 文件目录（与上面的 obj 处理类似）
+    mesh_obj_dir = os.path.join(processed_file.folder_path, "mesh", "obj")
+    mesh_obj_dir_abs = os.path.abspath(mesh_obj_dir)
+
+    if not os.path.exists(mesh_obj_dir_abs):
+        raise HTTPException(status_code=404, detail="OBJ directory not found")
+
+    obj_files = [f for f in os.listdir(mesh_obj_dir_abs) if f.endswith(".obj")]
+
+    if not obj_files:
+        raise HTTPException(status_code=404, detail="No .obj files found")
+
+    # 假设返回第一个找到的 .obj 文件
+    obj_file = obj_files[0]
+    obj_file_path = os.path.join(mesh_obj_dir_abs, obj_file)
+
+    # 将 obj 转换成 urdf 文件
+    urdf_file = os.path.join(mesh_obj_dir_abs, f"{project.name}.urdf")
+
+    try:
+        # 调用 obj 转 urdf 转换函数
+        convert_obj_to_urdf(obj_file_path, urdf_file)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error converting to URDF: {str(e)}")
+
+    return FileResponse(
+        urdf_file, filename=f"{project.name}.urdf", media_type="application/octet-stream"
+    )

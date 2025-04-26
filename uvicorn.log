@@ -1,0 +1,80 @@
+nohup: ignoring input
+INFO:     Will watch for changes in these directories: ['/workspace/dev/RealSceneDataEngineSZUFastAPI']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [9064] using StatReload
+INFO:     Started server process [9066]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.17.0.1:41536 - "GET /sse/projects HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58874 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58874 - "GET /sse/projects HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58876 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58876 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58892 - "GET /files/e56b3f44-88a8-4683-90f1-e28fe7c520ce.mp4 HTTP/1.1" 206 Partial Content
+INFO:     172.17.0.1:58876 - "GET /data_resources/listAll HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58876 - "GET /data_resources/1/preview-images HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58892 - "GET /files/e56b3f44-88a8-4683-90f1-e28fe7c520ce-video-preview/frame_1.jpg HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38052 - "GET /files/e56b3f44-88a8-4683-90f1-e28fe7c520ce-video-preview/frame_2.jpg HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38066 - "GET /files/e56b3f44-88a8-4683-90f1-e28fe7c520ce-video-preview/frame_3.jpg HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38070 - "GET /files/e56b3f44-88a8-4683-90f1-e28fe7c520ce-video-preview/frame_4.jpg HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38076 - "GET /files/e56b3f44-88a8-4683-90f1-e28fe7c520ce-video-preview/frame_5.jpg HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58876 - "OPTIONS /projects/add HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58876 - "POST /projects/add HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38084 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
+ffmpeg version 4.3 Copyright (c) 2000-2020 the FFmpeg developers
+  built with gcc 7.3.0 (crosstool-NG 1.23.0.449-a04d0)
+  configuration: --prefix=/opt/conda/conda-bld/ffmpeg_1597178665428/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeh --cc=/opt/conda/conda-bld/ffmpeg_1597178665428/_build_env/bin/x86_64-conda_cos6-linux-gnu-cc --disable-doc --disable-openssl --enable-avresample --enable-gnutls --enable-hardcoded-tables --enable-libfreetype --enable-libopenh264 --enable-pic --enable-pthreads --enable-shared --disable-static --enable-version3 --enable-zlib --enable-libmp3lame
+  libavutil      56. 51.100 / 56. 51.100
+  libavcodec     58. 91.100 / 58. 91.100
+  libavformat    58. 45.100 / 58. 45.100
+  libavdevice    58. 10.100 / 58. 10.100
+  libavfilter     7. 85.100 /  7. 85.100
+  libavresample   4.  0.  0 /  4.  0.  0
+  libswscale      5.  7.100 /  5.  7.100
+  libswresample   3.  7.100 /  3.  7.100
+INFO:     172.17.0.1:58876 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'uploads/e56b3f44-88a8-4683-90f1-e28fe7c520ce.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 1
+    compatible_brands: isommp41mp42
+    creation_time   : 2025-02-08T14:29:55.000000Z
+    copyright       : 
+    copyright-eng   : 
+  Duration: 00:00:11.67, start: 0.000000, bitrate: 1623 kb/s
+    Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709), 720x1280, 1570 kb/s, 29.64 fps, 29.97 tbr, 600 tbn, 1200 tbc (default)
+    Metadata:
+      creation_time   : 2025-02-08T14:29:55.000000Z
+      handler_name    : Core Media Video
+    Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, mono, fltp, 47 kb/s (default)
+    Metadata:
+      creation_time   : 2025-02-08T14:29:55.000000Z
+      handler_name    : Core Media Audio
+Please use -q:a or -q:v, -qscale is ambiguous
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> mjpeg (native))
+Press [q] to stop, [?] for help
+[swscaler @ 0x5cfba14850c0] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to '/workspace/dev/RealSceneDataEngineSZUFastAPI/uploads/e56b3f44-88a8-4683-90f1-e28fe7c520ce/input/%04d.jpg':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 1
+    compatible_brands: isommp41mp42
+    copyright-eng   : 
+    copyright       : 
+    encoder         : Lavf58.45.100
+    Stream #0:0(und): Video: mjpeg, yuvj420p(pc), 720x1280, q=1-31, 200 kb/s, 2 fps, 2 tbn, 2 tbc (default)
+    Metadata:
+      creation_time   : 2025-02-08T14:29:55.000000Z
+      handler_name    : Core Media Video
+      encoder         : Lavc58.91.100 mjpeg
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+frame=   23 fps=0.0 q=1.0 Lsize=N/A time=00:00:11.50 bitrate=N/A speed=  52x    
+video:3335kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+INFO:     172.17.0.1:58876 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:36786 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:35026 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46432 - "GET /data_resources/listAll HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46432 - "GET /data_resources/1/preview-images HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46432 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
