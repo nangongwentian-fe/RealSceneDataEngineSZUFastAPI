@@ -247,10 +247,32 @@ def to_obj(project_id: int, db: Session = Depends(get_db)):
     if not processed_file:
         raise HTTPException(status_code=404, detail="Processed file not found")
 
+    # 定义结果目录和相机文件路径
     result_dir = os.path.join(processed_file.folder_path, "results")
     result_dir_abs = os.path.abspath(result_dir)
+    
+    # 检查 results 目录是否存在，如果不存在，可能是导入的项目
+    if not os.path.exists(result_dir):
+        # 对于导入的项目，直接使用处理文件的文件夹路径
+        result_dir = processed_file.folder_path
+        result_dir_abs = os.path.abspath(result_dir)
+    
+    # 尝试找到 cameras.json 文件
+    # 首先检查 results 目录下
     result_camera_json = os.path.join(result_dir, "cameras.json")
+    
+    # 如果 results 目录下没有，则检查项目根目录
+    if not os.path.exists(result_camera_json):
+        root_camera_json = os.path.join(processed_file.folder_path, "cameras.json")
+        if os.path.exists(root_camera_json):
+            result_camera_json = root_camera_json
+    
     result_camera_json_abs = os.path.abspath(result_camera_json)
+    
+    # 如果仍然找不到 cameras.json，抛出异常
+    if not os.path.exists(result_camera_json_abs):
+        raise HTTPException(status_code=404, detail="cameras.json not found in project")
+    
     mesh_obj_dir = os.path.join(processed_file.folder_path, "mesh", "obj")
     mesh_obj_dir_abs = os.path.abspath(mesh_obj_dir)
 
@@ -266,10 +288,13 @@ def to_obj(project_id: int, db: Session = Depends(get_db)):
         return FileResponse(zip_filepath, filename=zip_filename, media_type="application/octet-stream")
 
     # 确保 cameras.json 在 /results 下
-    src_cameras = os.path.join(processed_file.folder_path, "cameras.json")
-    dest_cameras = os.path.join(result_dir_abs, "cameras.json")
-    if os.path.exists(src_cameras):
-        shutil.copy2(src_cameras, dest_cameras)
+    # 如果 cameras.json 在项目根目录，复制到 results 目录
+    if os.path.exists(result_dir) and not os.path.exists(os.path.join(result_dir, "cameras.json")):
+        src_cameras = os.path.join(processed_file.folder_path, "cameras.json")
+        dest_cameras = os.path.join(result_dir_abs, "cameras.json")
+        if os.path.exists(src_cameras):
+            shutil.copy2(src_cameras, dest_cameras)
+            result_camera_json_abs = os.path.abspath(dest_cameras)
     
     extract_cmd = f"gs-extract-mesh -m \"{result_dir_abs}\" -s \"{result_camera_json_abs}\" -o \"{mesh_obj_dir_abs}\""
     print(extract_cmd)
