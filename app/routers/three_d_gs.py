@@ -22,7 +22,7 @@ GAUSSIAN_SPLATTING_DIRECTORY = "/workspace/gaussian-splatting/"
 GAUSTUDIO_DIRECTORY = "/workspace/gaustudio/"
 
 # 创建线程池
-thread_pool = ThreadPoolExecutor(max_workers=3)
+thread_pool = ThreadPoolExecutor(max_workers=1)
 
 # 确保上传目录存在
 if not os.path.exists(UPLOAD_DIRECTORY):
@@ -71,6 +71,11 @@ async def create_three_dgs(file_id: int, db: Session = Depends(get_db)):
             
     db.commit()
 
+    # 检查当前是否有正在运行的任务 (pending, imaged, converted)
+    active_task_exists = db.query(ProcessedFileModel).filter(
+        ProcessedFileModel.status.in_(["pending", "imaged", "converted"])
+    ).first() is not None
+
     # 创建新任务
     folder_name = os.path.splitext(os.path.basename(static_file.path))[0]
     output_folder = os.path.join(UPLOAD_DIRECTORY, folder_name)
@@ -83,7 +88,7 @@ async def create_three_dgs(file_id: int, db: Session = Depends(get_db)):
     new_processed_file = ProcessedFileModel(
         file_id=file_id, 
         folder_path=output_folder, 
-        status="pending", 
+        status="queued" if active_task_exists else "pending",
         result_url=None
     )
     db.add(new_processed_file)
@@ -96,14 +101,15 @@ async def create_three_dgs(file_id: int, db: Session = Depends(get_db)):
     # 构建输出模式
     output_pattern = os.path.join(absolute_output_folder, 'input', "%04d.jpg")
 
-    # 在线程池中执行任务
-    thread_pool.submit(
-        run_task_in_thread, 
-        new_processed_file.id, 
-        absolute_output_folder, 
-        static_file.path,
-        output_pattern
-    )
+    # 如果没有其他活动任务，则启动当前任务
+    if new_processed_file.status == "pending":
+        thread_pool.submit(
+            run_task_in_thread, 
+            new_processed_file.id, 
+            absolute_output_folder, 
+            static_file.path,
+            output_pattern
+        )
     
     return new_processed_file
 
@@ -235,6 +241,50 @@ def run_task_in_thread(task_id: int, absolute_output_folder: str, input_video_pa
         send_status_update(db, task)
     finally:
         db.close()
+        # 任务结束后，检查是否有排队的任务并启动
+        try:
+            next_db_session = SessionLocal()
+            queued_task = next_db_session.query(ProcessedFileModel).filter(
+                ProcessedFileModel.status == "queued"
+            ).order_by(ProcessedFileModel.id.asc()).first()
+
+            if queued_task:
+                print(f"找到排队任务: {queued_task.id}, 准备启动...")
+                queued_task.status = "pending"
+                next_db_session.commit()
+                
+                # 重新获取文件和路径信息，因为它们不在 queued_task 对象中，或者确保它们被正确传递
+                # 这里假设我们可以从 queued_task.file_id 重新获取 static_file
+                # 并且 queued_task.folder_path 已经是正确的绝对路径 (或者需要重新构建)
+                # 这里的实现需要仔细核对原始 create_three_dgs 的逻辑
+                static_file_for_queued_task = next_db_session.query(StaticFileModel).filter(StaticFileModel.id == queued_task.file_id).first()
+                if static_file_for_queued_task:
+                    # 确保 folder_path 是绝对路径，如果之前存的是相对路径，需要转换
+                    # 从 create_three_dgs 逻辑看, folder_path 是类似 uploads/foldername
+                    # run_task_in_thread 期望 absolute_output_folder
+                    absolute_output_folder_for_queued_task = os.path.abspath(queued_task.folder_path)
+                    output_pattern_for_queued_task = os.path.join(absolute_output_folder_for_queued_task, 'input', "%04d.jpg")
+
+                    thread_pool.submit(
+                        run_task_in_thread,
+                        queued_task.id,
+                        absolute_output_folder_for_queued_task,
+                        static_file_for_queued_task.path, # 这是原始视频/文件的路径
+                        output_pattern_for_queued_task
+                    )
+                    print(f"排队任务 {queued_task.id} 已提交执行。")
+                else:
+                    print(f"错误：无法为排队任务 {queued_task.id} 找到关联的 StaticFileModel。")
+                    queued_task.status = "failed" # 或者其他错误状态
+                    next_db_session.commit()
+                    # 可能需要发送一个失败通知
+
+        except Exception as e:
+            print(f"检查并启动排队任务时出错: {str(e)}")
+            print(f"错误堆栈: ", traceback.format_exc())
+        finally:
+            if 'next_db_session' in locals() and next_db_session:
+                next_db_session.close()
 
 
 @router.post("/threeDGS/toObj")
