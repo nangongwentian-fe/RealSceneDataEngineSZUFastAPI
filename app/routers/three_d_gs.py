@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse
 from app.models.database import get_db, SessionLocal
 from app.models.static_file import StaticFile as StaticFileModel
 from app.models.processed_file import ProcessedFile as ProcessedFileModel
-from app.models.SegmentFile import SegmentFile as SegmentFileModel
+from app.models.segment_file import SegmentFile as SegmentFileModel
 from app.schemas.processed_file import ProcessedFile
 import traceback  # 添加这行
 from concurrent.futures import ThreadPoolExecutor
@@ -379,17 +379,17 @@ def segmentGS(project_id: int, prompt_text: str, db: Session = Depends(get_db)):
     if not processed_file:
         raise HTTPException(status_code=404, detail="Processed file not found")
 
-    segment_file = db.query(SegmentFileModel).filter(SegmentFileModel.processed_file_id == processed_file.id,
-                                                     SegmentFileModel.segment_prompt_text == prompt_text).first()
-    if segment_file:
-        raise HTTPException(status_code=200, detail="Segment files already exist")
-
     absolute_output_folder = os.path.abspath(processed_file.folder_path)
     scene = absolute_output_folder.split('/')[-1]
     model_path = absolute_output_folder + "/results"
     source_path = absolute_output_folder
     image_path = source_path + "/images"
     ckpt_path = model_path + "/chkpnt30000.pth"
+
+    segment_file = db.query(SegmentFileModel).filter(SegmentFileModel.processed_file_id == processed_file.id,
+                                                     SegmentFileModel.segment_prompt_text == prompt_text).first()
+    if segment_file:
+        return segment_file.result_url
 
     # 基于提示文本对原图片提取mask
     extract_masks_command = f'python submodules/Grounded-SAM-2/grounded_sam2_stable_tracking.py --video_dir {image_path} --output {model_path} --text \"{prompt_text}\"'
@@ -415,12 +415,14 @@ def segmentGS(project_id: int, prompt_text: str, db: Session = Depends(get_db)):
             )
     
     # 保存到数据库
-    if extract_masks_result.returncode == 0 and segment_result == 0:
+    if extract_masks_result.returncode == 0 and segment_result.returncode == 0:
+        result_url = scene + '/results/masks/' + prompt_text + '/segment.ply'
         new_segment_file = SegmentFileModel(
             processed_file_id = processed_file.id,
             segment_prompt_text = prompt_text,
-            result_url = scene + '/results/masks/' + prompt_text + '/segment.ply' # 相对路径
+            result_url = result_url # 相对路径
         )
         db.add(new_segment_file)
         db.commit()
         db.refresh(new_segment_file)
+        return result_url
