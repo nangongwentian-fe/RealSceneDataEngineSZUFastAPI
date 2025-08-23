@@ -7,6 +7,7 @@ from fastapi.responses import FileResponse
 from app.models.database import get_db, SessionLocal
 from app.models.static_file import StaticFile as StaticFileModel
 from app.models.processed_file import ProcessedFile as ProcessedFileModel
+from app.models.segment_file import SegmentFile as SegmentFileModel
 from app.schemas.processed_file import ProcessedFile
 import traceback  # 添加这行
 from concurrent.futures import ThreadPoolExecutor
@@ -20,6 +21,7 @@ router = APIRouter()
 UPLOAD_DIRECTORY = "uploads/"
 GAUSSIAN_SPLATTING_DIRECTORY = "/workspace/gaussian-splatting/"
 GAUSTUDIO_DIRECTORY = "/workspace/gaustudio/"
+COB_GS_DIRECTORY = '/workspace/COB-GS/'
 
 # 创建线程池
 thread_pool = ThreadPoolExecutor(max_workers=1)
@@ -171,7 +173,7 @@ def run_task_in_thread(task_id: int, absolute_output_folder: str, input_video_pa
 
         # 2. 构建命令
         convert_command = f"python convert.py -s {absolute_output_folder}"
-        train_command = f"python train.py -s {absolute_output_folder} --model_path {os.path.join(absolute_output_folder, 'results')}"
+        train_command = f"python train.py -s {absolute_output_folder} --model_path {os.path.join(absolute_output_folder, 'results')} --checkpoint_iterations 30000"
 
         # 3. 执行转换命令
         try:
@@ -366,3 +368,61 @@ def to_obj(project_id: int, db: Session = Depends(get_db)):
                     zipf.write(file_path, arcname)
     
     return FileResponse(zip_filepath, filename=zip_filename, media_type="application/octet-stream")
+
+@router.post("/threeDGS/segmentGS")
+def segmentGS(project_id: int, prompt_text: str, db: Session = Depends(get_db)):
+    project = db.query(ProjectModel).filter(ProjectModel.id == project_id).first()
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    
+    processed_file = db.query(ProcessedFileModel).filter(ProcessedFileModel.id == project.processed_file_id).first()
+    if not processed_file:
+        raise HTTPException(status_code=404, detail="Processed file not found")
+
+    absolute_output_folder = os.path.abspath(processed_file.folder_path)
+    scene = absolute_output_folder.split('/')[-1]
+    model_path = absolute_output_folder + "/results"
+    source_path = absolute_output_folder
+    image_path = source_path + "/images"
+    ckpt_path = model_path + "/chkpnt30000.pth"
+
+    segment_file = db.query(SegmentFileModel).filter(SegmentFileModel.processed_file_id == processed_file.id,
+                                                     SegmentFileModel.segment_prompt_text == prompt_text).first()
+    if segment_file:
+        return segment_file.result_url
+
+    # 基于提示文本对原图片提取mask
+    extract_masks_command = f'python submodules/Grounded-SAM-2/grounded_sam2_stable_tracking.py --video_dir {image_path} --output {model_path} --text \"{prompt_text}\"'
+    # 3DGS 分割
+    segment_command = f'python train.py -s {source_path} -m {model_path} --start_checkpoint {ckpt_path} --include_mask --finetune_mask --text \"{prompt_text}\" --N4views 14 --mask_signals_threshold 0.8 -r 1'
+    extract_masks_result = subprocess.run(
+                extract_masks_command,
+                shell=True,
+                capture_output=True,
+                text=True,
+                encoding='utf-8',
+                errors='replace',
+                cwd=COB_GS_DIRECTORY
+            )
+    segment_result = subprocess.run(
+                segment_command,
+                shell=True,
+                capture_output=True,
+                text=True,
+                encoding='utf-8',
+                errors='replace',
+                cwd=COB_GS_DIRECTORY
+            )
+    
+    # 保存到数据库
+    if extract_masks_result.returncode == 0 and segment_result.returncode == 0:
+        result_url = scene + '/results/masks/' + prompt_text + '/segment.ply'
+        new_segment_file = SegmentFileModel(
+            processed_file_id = processed_file.id,
+            segment_prompt_text = prompt_text,
+            result_url = result_url # 相对路径
+        )
+        db.add(new_segment_file)
+        db.commit()
+        db.refresh(new_segment_file)
+        return result_url

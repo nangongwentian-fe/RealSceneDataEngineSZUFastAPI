@@ -13,3 +13,4 @@ class ProcessedFile(Base):
 
     static_file = relationship("StaticFile", back_populates="processed_files")
     projects = relationship("Project", back_populates="processed_file")
+    segment_files = relationship("SegmentFile", back_populates="processed_file")
