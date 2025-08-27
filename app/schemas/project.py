@@ -7,6 +7,7 @@ class ProjectCreate(BaseModel):
     name: str
     static_file_id: int
     project_cover_image_static_id: int
+    algorithm: str = "3dgs"
 
 class ProjectImport(BaseModel):
     name: str
