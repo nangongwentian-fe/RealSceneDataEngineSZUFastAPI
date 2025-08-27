@@ -31,6 +31,9 @@ COB_GS_DIRECTORY = '/workspace/COB-GS/'
 # 任务取消标志字典
 task_cancel_events = {}
 
+# 任务取消标志字典
+task_cancel_events = {}
+
 # 创建线程池
 thread_pool = ThreadPoolExecutor(max_workers=1)
 
