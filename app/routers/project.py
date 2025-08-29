@@ -1,5 +1,6 @@
 # app/routers/project.py
 from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File, Form
+from typing import Optional
 from sqlalchemy.orm import Session
 import os
 import shutil
@@ -58,11 +59,22 @@ async def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
 def list_projects(
     page: int = Query(default=1, ge=1, description="页码"),
     page_size: int = Query(default=10, ge=1, le=100, description="每页数量"),
+    tag_id: Optional[int] = Query(default=None, description="标签ID筛选"),
     db: Session = Depends(get_db)
 ):
+    query = db.query(ProjectModel)
+    
+    # 如果指定了标签ID，则筛选包含该标签的项目
+    if tag_id is not None:
+        from app.models.tag import Tag as TagModel
+        query = query.join(ProjectModel.tags).filter(TagModel.id == tag_id)
+    
+    # 获取项目总数
+    total = query.count()
+    
     # 计算跳过的记录数
     skip = (page - 1) * page_size
-    projects = db.query(ProjectModel).offset(skip).limit(page_size).all()
+    projects = query.offset(skip).limit(page_size).all()
 
     # 构建返回结果
     result = []
@@ -93,13 +105,80 @@ def list_projects(
                 "path": cover_image.path if cover_image else None,
                 "filename": cover_image.filename if cover_image else None,
                 "original_filename": cover_image.original_filename if cover_image else None
-            } if cover_image else {}
+            } if cover_image else {},
+            "tags": [
+                {
+                    "id": tag.id,
+                    "name": tag.name,
+                    "color": tag.color
+                } for tag in project.tags
+            ]
         })
+
+    # 计算总页数
+    total_pages = (total + page_size - 1) // page_size if total > 0 else 0
 
     return {
         "code": 200,
         "data": result,
+        "pagination": {
+            "total": total,           # 总项目数
+            "page": page,             # 当前页码
+            "page_size": page_size,   # 每页数量
+            "total_pages": total_pages, # 总页数
+            "has_next": page < total_pages,  # 是否有下一页
+            "has_prev": page > 1      # 是否有上一页
+        },
         "msg": "请求成功"
+    }
+
+@router.get("/projects/count")
+def get_project_count(db: Session = Depends(get_db)):
+    """
+    获取项目总数统计
+    
+    返回:
+    - total: 项目总数
+    - msg: 响应消息
+    """
+    total = db.query(ProjectModel).count()
+    return {
+        "code": 200,
+        "total": total,
+        "msg": "获取项目总数成功"
+    }
+
+@router.get("/projects/statistics")
+def get_project_statistics(db: Session = Depends(get_db)):
+    """
+    获取项目详细统计信息
+    
+    返回:
+    - total: 项目总数
+    - status_stats: 按处理状态统计的项目数量
+    - msg: 响应消息
+    """
+    # 获取项目总数
+    total = db.query(ProjectModel).count()
+    
+    # 按处理状态统计
+    status_stats = {}
+    if total > 0:
+        # 获取所有项目的处理状态
+        projects_with_status = db.query(ProjectModel, ProcessedFileModel.status).join(
+            ProcessedFileModel, ProjectModel.processed_file_id == ProcessedFileModel.id
+        ).all()
+        
+        # 统计各状态数量
+        for _, status in projects_with_status:
+            if status:
+                status_stats[status] = status_stats.get(status, 0) + 1
+    
+    return {
+        "code": 200,
+        "total": total,
+        "status_stats": status_stats,
+        "msg": "获取项目统计信息成功"
     }
 
 @router.delete("/projects/{project_id}", response_model=bool)

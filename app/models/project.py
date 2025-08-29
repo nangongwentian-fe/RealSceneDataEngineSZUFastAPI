@@ -15,3 +15,6 @@ class Project(Base):
     processed_file = relationship("ProcessedFile", back_populates="projects")
     static_file = relationship("StaticFile", foreign_keys=[static_file_id], back_populates="projects")
     cover_image = relationship("StaticFile", foreign_keys=[project_cover_image_static_id], back_populates="projects")
+    
+    # 新增：标签关联
+    tags = relationship("Tag", secondary="project_tags", back_populates="projects")

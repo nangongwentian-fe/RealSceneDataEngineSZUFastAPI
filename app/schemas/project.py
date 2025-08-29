@@ -1,7 +1,8 @@
 # app/schemas/project.py
 from pydantic import BaseModel
 from fastapi import UploadFile, Form
-from typing import Optional
+from typing import Optional, List
+from .tag import Tag
 
 class ProjectCreate(BaseModel):
     name: str
@@ -19,6 +20,11 @@ class Project(BaseModel):
     processed_file_id: int
     static_file_id: int
     project_cover_image_static_id: int
+    tags: List[Tag] = []  # 新增：标签列表
 
     class Config:
         from_attributes = True
+
+class ProjectListResponse(BaseModel):
+    data: List[Project]
+    pagination: dict
