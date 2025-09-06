@@ -1,505 +1,95 @@
 nohup: ignoring input
 INFO:     Will watch for changes in these directories: ['/workspace/RealSceneDataEngineSZUFastAPI']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [754041] using StatReload
-INFO:     Started server process [754045]
+INFO:     Started reloader process [990080] using StatReload
+INFO:     Started server process [990083]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     172.31.225.122:4917 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4927 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4929 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4930 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4929 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4928 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8064 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8066 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8067 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8068 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8065 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8254 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8286 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8593 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8594 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8595 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8596 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8597 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8599 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8600 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8601 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8598 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8598 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8598 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8598 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8598 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8598 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8598 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8667 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:8667 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10440 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10441 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10442 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10443 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10439 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10439 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10439 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10439 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10439 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10728 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10730 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10729 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10731 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10732 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10734 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10735 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10736 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10733 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10882 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10882 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10936 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10950 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10952 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10953 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10954 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10951 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10951 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10951 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10951 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10951 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:10951 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11055 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11148 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11147 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11146 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11149 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11145 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11264 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11266 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11267 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11268 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11265 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11265 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4025 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4094 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4095 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4093 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4096 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4092 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4092 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4114 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4123 - "OPTIONS /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4124 - "GET /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4166 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4166 - "OPTIONS /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4170 - "GET /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4170 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:4170 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3035 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13532 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13534 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13535 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13536 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13537 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13539 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13540 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13541 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13538 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13538 - "GET /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13538 - "GET /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13538 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13538 - "OPTIONS /projects/1/tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13569 - "POST /projects/1/tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13569 - "GET /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13569 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13585 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13585 - "OPTIONS /projects/1/tags/3 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13586 - "DELETE /projects/1/tags/3 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13586 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13680 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13681 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13682 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13683 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13686 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13685 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13687 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13684 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13684 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13687 - "OPTIONS /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13685 - "GET /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13685 - "OPTIONS /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13686 - "GET /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13711 - "GET /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.17.0.1:64003 - "GET /?Z73223750370Q1 HTTP/1.0" 200 OK
-INFO:     172.30.48.37:64940 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64941 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64942 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64939 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64943 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64946 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64945 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64950 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64944 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64952 - "GET /files/d92ffb3a-dacc-415f-a65e-69a5697f2e11-video-preview/frame_1.jpg HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64955 - "GET /files/20250730221606_154a94ef_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64953 - "GET /files/20250730222657_37e323f5_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64954 - "GET /files/20250730222448_fb6183e2_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64956 - "GET /files/20250730222806_74ec07f9_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64952 - "GET /files/20250730223002_3cdc9289_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64959 - "GET /files/20250730223459_cc86fcad_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64952 - "GET /files/20250730223612_0f506926_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64954 - "GET /files/20250730223752_3a2a67c1_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64953 - "GET /files/20250730223534_015cb5ab_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64955 - "GET /files/20250730223044_30e96607_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64952 - "GET /files/20250730223401_b79944a2_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64953 - "GET /files/20250730223955_0a8a46b8_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64959 - "GET /files/20250730223238_e125c22b_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64997 - "OPTIONS /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64998 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:64998 - "OPTIONS /projects/list?page=2&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65003 - "GET /projects/list?page=2&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65016 - "OPTIONS /projects/list?tag_id=1&page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65017 - "GET /projects/list?tag_id=1&page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65030 - "OPTIONS /projects/list?tag_id=2&page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65031 - "GET /projects/list?tag_id=2&page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65031 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65031 - "OPTIONS /projects/list?tag_id=3&page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65042 - "GET /projects/list?tag_id=3&page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65114 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65115 - "POST /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65115 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65115 - "OPTIONS /tags/4 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65148 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65148 - "OPTIONS /projects/3/tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65161 - "POST /projects/3/tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65161 - "GET /projects/list?tag_id=3&page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65192 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65191 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65194 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65193 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65190 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65190 - "OPTIONS /projects/list?tag_id=4&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65193 - "GET /projects/list?tag_id=4&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65238 - "OPTIONS /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65239 - "GET /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65239 - "OPTIONS /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65251 - "GET /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65251 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65282 - "GET /projects/list?tag_id=4&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65308 - "OPTIONS /projects/list?tag_id=3&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65309 - "GET /projects/list?tag_id=3&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65362 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65362 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65362 - "GET /projects/list?page=2&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65362 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65362 - "GET /projects/list?page=2&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65362 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65400 - "GET /projects/list?page=2&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65400 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65423 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65423 - "OPTIONS /projects/list?page=1&page_size=30 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65434 - "GET /projects/list?page=1&page_size=30 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65434 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65434 - "GET /projects/list?page=2&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:65525 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.17.0.1:49887 - "GET /.well-known/security.txt HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:50651 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:50925 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:51793 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52149 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52228 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52229 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:55157 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:55165 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:55243 - "HEAD / HTTP/1.0" 405 Method Not Allowed
-INFO:     172.17.0.1:55249 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:57222 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:57230 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:57231 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:57238 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:57246 - "GET /sitemap.xml HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:59596 - "GET / HTTP/1.0" 200 OK
-INFO:     172.30.48.37:56168 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56188 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56187 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56186 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56189 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56190 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56191 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56192 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56197 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56193 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56200 - "GET /files/d92ffb3a-dacc-415f-a65e-69a5697f2e11-video-preview/frame_1.jpg HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56201 - "GET /files/20250730221606_154a94ef_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56202 - "GET /files/20250730222448_fb6183e2_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56203 - "GET /files/20250730222657_37e323f5_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56204 - "GET /files/20250730222806_74ec07f9_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56205 - "GET /files/20250730223238_e125c22b_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56200 - "GET /files/20250730223612_0f506926_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56200 - "GET /files/20250730223534_015cb5ab_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56202 - "GET /files/20250730223955_0a8a46b8_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56203 - "GET /files/20250730223044_30e96607_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56204 - "GET /files/20250730223002_3cdc9289_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56205 - "GET /files/20250730223459_cc86fcad_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56200 - "GET /files/20250730223401_b79944a2_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:56201 - "GET /files/20250730223752_3a2a67c1_cover.png HTTP/1.1" 200 OK
-INFO:     172.17.0.1:51394 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52579 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:52919 - "GET /aaa9 HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:52930 - "GET /aab8 HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:52931 - "GET / HTTP/1.0" 200 OK
-INFO:     172.30.48.37:51143 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51141 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51142 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51144 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51145 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51148 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51147 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51152 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51146 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51156 - "GET /files/d92ffb3a-dacc-415f-a65e-69a5697f2e11-video-preview/frame_1.jpg HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51160 - "GET /files/20250730221606_154a94ef_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51158 - "GET /files/20250730222448_fb6183e2_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51159 - "GET /files/20250730222657_37e323f5_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51157 - "GET /files/20250730222806_74ec07f9_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51161 - "GET /files/20250730223002_3cdc9289_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51156 - "GET /files/20250730223612_0f506926_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51161 - "GET /files/20250730223044_30e96607_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51156 - "GET /files/20250730223459_cc86fcad_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51158 - "GET /files/20250730223238_e125c22b_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51159 - "GET /files/20250730223401_b79944a2_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51157 - "GET /files/20250730223534_015cb5ab_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51160 - "GET /files/20250730223955_0a8a46b8_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51161 - "GET /files/20250730223752_3a2a67c1_cover.png HTTP/1.1" 200 OK
-INFO:     172.30.48.37:51152 - "GET /files/d92ffb3a-dacc-415f-a65e-69a5697f2e11/results/point_cloud/iteration_30000/point_cloud.ply HTTP/1.1" 200 OK
-INFO:     172.17.0.1:56581 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:56640 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:58537 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:59276 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:59904 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:59905 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:52511 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52516 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52517 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:52522 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:52526 - "GET /sitemap.xml HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:54825 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:55415 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:56889 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:57857 - "GET /druid/index.html HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:58893 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:62384 - "GET /robots.txt HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:62389 - "GET /files/20250730223238_e125c22b_cover.png HTTP/1.0" 200 OK
-INFO:     172.17.0.1:63268 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:50977 - "HEAD / HTTP/1.0" 405 Method Not Allowed
-INFO:     172.17.0.1:50980 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:50984 - "GET / HTTP/1.0" 200 OK
-INFO:     172.31.225.122:9505 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:9506 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.17.0.1:52249 - "GET / HTTP/1.0" 200 OK
-INFO:     172.31.225.122:14454 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:14457 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.17.0.1:53491 - "HEAD / HTTP/1.0" 405 Method Not Allowed
-INFO:     172.17.0.1:53504 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:53505 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:56362 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:56374 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:56409 - "GET /aaa9 HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:56413 - "GET /aab8 HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:56414 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:57711 - "GET / HTTP/1.0" 200 OK
-INFO:     172.31.225.122:2295 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.17.0.1:63702 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:50707 - "GET /aaa9 HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:50708 - "GET /aab8 HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:50709 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:51172 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52964 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:53578 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:54668 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:56349 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:57307 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:57308 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:57309 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:57316 - "GET /wiki HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:57799 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:58823 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:58827 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:58828 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:58835 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:58839 - "GET /.well-known/security.txt HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:60267 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60275 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:49798 - "GET /?Z73223750370Q1 HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52586 - "GET /files/20250730222448_fb6183e2_cover.png HTTP/1.0" 200 OK
-WARNING:  Invalid HTTP request received.
-WARNING:  Invalid HTTP request received.
-INFO:     172.17.0.1:61791 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:61793 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:61838 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:62042 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:62094 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:62397 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:62402 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:62405 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:62413 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:62414 - "GET /.well-known/security.txt HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:65372 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:51642 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:51646 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:51647 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:51650 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:51653 - "GET /security.txt HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:52519 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:55699 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:57393 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:60021 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:60223 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60344 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60981 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:63006 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:63838 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:63847 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:64923 - "GET /404/search_children.js HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:65034 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:49798 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:55311 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:55667 - "GET / HTTP/1.0" 200 OK
-INFO:     172.31.225.122:12831 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:2278 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3425 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3427 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3426 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3432 - "GET /files/d92ffb3a-dacc-415f-a65e-69a5697f2e11-video-preview/frame_1.jpg HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3433 - "GET /files/20250730221606_154a94ef_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3434 - "GET /files/20250730222448_fb6183e2_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3435 - "GET /files/20250730222657_37e323f5_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3436 - "GET /files/20250730222806_74ec07f9_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3437 - "GET /files/20250730223459_cc86fcad_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3432 - "GET /files/20250730223044_30e96607_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3434 - "GET /files/20250730223238_e125c22b_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3435 - "GET /files/20250730223002_3cdc9289_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:3432 - "GET /files/20250730223401_b79944a2_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11776 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11777 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11778 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11779 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11780 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11783 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11781 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11784 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11782 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11785 - "GET /files/20250730223534_015cb5ab_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11786 - "GET /files/20250730223612_0f506926_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11787 - "GET /files/20250730223955_0a8a46b8_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:11788 - "GET /files/20250730223752_3a2a67c1_cover.png HTTP/1.1" 200 OK
-INFO:     172.31.225.122:12284 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:12286 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:12287 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:12288 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:12285 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:2237 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:2236 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.17.0.1:59909 - "HEAD / HTTP/1.0" 405 Method Not Allowed
-INFO:     172.31.225.122:5400 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7438 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7439 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7440 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7441 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7442 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7444 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7445 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7446 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7443 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7476 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7476 - "OPTIONS /projects/1/tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7485 - "POST /projects/1/tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7485 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7485 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7485 - "POST /projects/1/tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7485 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7509 - "OPTIONS /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7510 - "GET /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7510 - "OPTIONS /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7525 - "GET /projects/list?tag_id=2&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7525 - "OPTIONS /projects/list?tag_id=3&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7527 - "GET /projects/list?tag_id=3&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7527 - "OPTIONS /projects/list?tag_id=4&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7531 - "GET /projects/list?tag_id=4&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7531 - "GET /projects/list?tag_id=1&page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7531 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7531 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7531 - "OPTIONS /projects/1/tags/3 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7539 - "OPTIONS /projects/1/tags/4 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7540 - "DELETE /projects/1/tags/3 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7541 - "DELETE /projects/1/tags/4 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7541 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7543 - "OPTIONS /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7544 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7544 - "OPTIONS /projects/list?page=2&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7545 - "GET /projects/list?page=2&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:7545 - "GET /projects/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.17.0.1:52352 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52608 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52609 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:53166 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:53199 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:53207 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:53208 - "GET /robots.txt HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:53209 - "GET /sitemap.xml HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:53210 - "GET /config.json HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:53762 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:55998 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:55999 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:56011 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:56013 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:56567 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:57172 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60397 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60398 - "GET /api/contents?type=directory HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:60633 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:64384 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:64601 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:49458 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:53029 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:53030 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:53258 - "GET /login.asp HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:59642 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:59649 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:59827 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60961 - "GET / HTTP/1.0" 200 OK
-INFO:     172.31.225.122:12805 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:12928 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:12954 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13298 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13299 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13300 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13301 - "OPTIONS /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13301 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13300 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13343 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.31.225.122:13301 - "GET /tags HTTP/1.1" 200 OK
-INFO:     172.17.0.1:51276 - "GET /druid/index.html HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:51334 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:51335 - "GET /druid/index.html HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:51342 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:51531 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:51725 - "GET /ip.php?Z73223750370Q1 HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:52292 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52343 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52347 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:52353 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:56200 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:57691 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60226 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60231 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60232 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:60235 - "GET /favicon.ico HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:60238 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:61404 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:61412 - "GET / HTTP/1.0" 200 OK
-INFO:     172.31.225.122:1273 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.17.0.1:53874 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:56086 - "GET / HTTP/1.0" 200 OK
-INFO:     172.31.225.122:10959 - "GET /sse/projects HTTP/1.1" 200 OK
-INFO:     172.17.0.1:58511 - "GET / HTTP/1.0" 200 OK
-INFO:     172.17.0.1:60292 - "HEAD /pscc/ HTTP/1.0" 404 Not Found
-INFO:     172.17.0.1:60293 - "HEAD /start/index.html HTTP/1.0" 404 Not Found
+INFO:     172.31.225.122:7722 - "GET /sse/projects HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7723 - "GET /sse/projects HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7735 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7736 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7737 - "OPTIONS /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7738 - "OPTIONS /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7739 - "GET /sse/projects HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7740 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7742 - "GET /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7741 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7740 - "GET /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:7743 - "GET /files/6cd3832e-bd7b-4c3a-95bf-0f4786f5f706-video-preview/frame_1.jpg HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8373 - "OPTIONS /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8372 - "GET /sse/projects HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8374 - "OPTIONS /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8375 - "OPTIONS /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8376 - "OPTIONS /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8378 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8379 - "GET /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8377 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8380 - "GET /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8381 - "GET /files/6cd3832e-bd7b-4c3a-95bf-0f4786f5f706-video-preview/frame_1.jpg HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8443 - "GET /sse/projects HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8442 - "GET /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8440 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8441 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8444 - "GET /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8607 - "GET /sse/projects HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8609 - "GET /tags HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8608 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8606 - "GET /projects/list?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:     172.31.225.122:8610 - "GET /tags HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59975 - "GET /tags HTTP/1.0" 200 OK
+INFO:     172.17.0.1:59976 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.0" 200 OK
+INFO:     172.17.0.1:59974 - "GET /projects/list?page=1&page_size=20 HTTP/1.0" 200 OK
+INFO:     172.17.0.1:59977 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:59978 - "GET /tags HTTP/1.0" 200 OK
+INFO:     172.17.0.1:59979 - "GET /files/6cd3832e-bd7b-4c3a-95bf-0f4786f5f706-video-preview/frame_1.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:59986 - "GET /files/6cd3832e-bd7b-4c3a-95bf-0f4786f5f706_lp-3dgs_20250906222325_8ad60d95/results/point_cloud/iteration_30000/point_cloud.ply HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60012 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60037 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60058 - "GET /tags HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60056 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60057 - "GET /projects/list?page=1&page_size=20 HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60059 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60060 - "GET /tags HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60061 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60065 - "GET /data_resources/listAll HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60066 - "GET /data_resources/1/preview-images HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60068 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_2.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60067 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_1.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60069 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_3.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60070 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_4.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60071 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_5.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60085 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_4.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60087 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_4.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60090 - "GET /files/6cd3832e-bd7b-4c3a-95bf-0f4786f5f706_lp-3dgs_20250906222325_8ad60d95/results/point_cloud/iteration_30000/point_cloud.ply HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60092 - "GET /data_resources/listAll HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60100 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_1.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60101 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_1.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60107 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_3.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60108 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60109 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_3.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60122 - "GET /data_resources/list?page=1&page_size=10 HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60137 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60151 - "GET /projects/list?page=1&page_size=20 HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60152 - "GET /data_resources/1/preview-images HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60164 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60188 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60198 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_2.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60199 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_2.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60203 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_5.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60204 - "GET /files/6cae0325-3310-4285-9b77-2835fcc9b565-video-preview/frame_5.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60213 - "GET /tags HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60217 - "GET /files/6cd3832e-bd7b-4c3a-95bf-0f4786f5f706-video-preview/frame_1.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60218 - "GET /files/6cd3832e-bd7b-4c3a-95bf-0f4786f5f706-video-preview/frame_1.jpg HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60225 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60251 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60281 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60309 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60333 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60358 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60388 - "GET /sse/projects HTTP/1.0" 200 OK
+INFO:     172.17.0.1:60413 - "GET /ip.php?Z73223750370Q1 HTTP/1.0" 404 Not Found
+INFO:     172.17.0.1:60414 - "GET /sse/projects HTTP/1.0" 200 OK
+WARNING:  StatReload detected changes in 'app/routers/three_d_gs.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)

@@ -2,6 +2,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File, Form
 from typing import Optional
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 import os
 import shutil
 import zipfile
@@ -62,7 +63,12 @@ def list_projects(
     tag_id: Optional[int] = Query(default=None, description="标签ID筛选"),
     db: Session = Depends(get_db)
 ):
-    query = db.query(ProjectModel)
+    # 过滤掉处理失败的项目（ProcessedFile.status == 'failed'）
+    query = db.query(ProjectModel).outerjoin(
+        ProcessedFileModel, ProjectModel.processed_file_id == ProcessedFileModel.id
+    ).filter(
+        or_(ProcessedFileModel.id == None, ProcessedFileModel.status != "failed")
+    ).order_by(ProjectModel.id.desc())
     
     # 如果指定了标签ID，则筛选包含该标签的项目
     if tag_id is not None:
@@ -141,7 +147,9 @@ def get_project_count(db: Session = Depends(get_db)):
     - total: 项目总数
     - msg: 响应消息
     """
-    total = db.query(ProjectModel).count()
+    total = db.query(ProjectModel).outerjoin(ProcessedFileModel, ProjectModel.processed_file_id == ProcessedFileModel.id).filter(
+        or_(ProcessedFileModel.id == None, ProcessedFileModel.status != "failed")
+    ).count()
     return {
         "code": 200,
         "total": total,
@@ -159,7 +167,9 @@ def get_project_statistics(db: Session = Depends(get_db)):
     - msg: 响应消息
     """
     # 获取项目总数
-    total = db.query(ProjectModel).count()
+    total = db.query(ProjectModel).outerjoin(ProcessedFileModel, ProjectModel.processed_file_id == ProcessedFileModel.id).filter(
+        or_(ProcessedFileModel.id == None, ProcessedFileModel.status != "failed")
+    ).count()
     
     # 按处理状态统计
     status_stats = {}

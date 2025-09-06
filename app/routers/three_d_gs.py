@@ -20,6 +20,19 @@ import uuid
 import datetime
 from typing import Optional, Dict, List
 import signal
+import sys
+import logging
+
+# 配置日志
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+def debug_print(message):
+    """打印并记录调试信息，强制刷新缓冲区"""
+    print(message, flush=True)
+    logger.info(message)
+    sys.stdout.flush()
+    sys.stderr.flush()
 
 router = APIRouter()
 
@@ -133,6 +146,7 @@ def _find_latest_point_cloud_ply(absolute_output_folder: str) -> Optional[str]:
 
 @router.get("/threeDGS/status/{task_id}")
 async def get_task_status(task_id: int, db: Session = Depends(get_db)):
+    debug_print(f"[threeDGS] 查询任务状态: task_id={task_id}")
     task = db.query(ProcessedFileModel).filter(ProcessedFileModel.id == task_id).first()
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
@@ -149,6 +163,7 @@ def clean_failed_task_results(folder_path: str):
 
 @router.post("/threeDGS/createThreeDGS", response_model=ProcessedFile)
 async def create_three_dgs(file_id: int, algorithm: str = "3dgs", db: Session = Depends(get_db)):
+    debug_print(f"[threeDGS] 收到创建请求: file_id={file_id}, algorithm={algorithm}")
     # 获取文件信息
     static_file = db.query(StaticFileModel).filter(StaticFileModel.id == file_id).first()
     if not static_file:
@@ -238,13 +253,14 @@ def run_task_in_thread(task_id: int, absolute_output_folder: str, input_video_pa
             loop.close()
     # 创建/获取取消事件
     cancel_event = task_cancel_events.setdefault(task_id, Event())
+    debug_print(f"[threeDGS] ===== 开始处理任务 {task_id} (算法: {algorithm}) =====")
     try:
         db = next(get_db_session())
         task = db.query(ProcessedFileModel).filter(ProcessedFileModel.id == task_id).first()
         # 1. FFmpeg处理视频（可中断）
         try:
             if cancel_event.is_set() or (task and task.status == "failed"):
-                print(f"任务{task_id}已被取消，终止执行。")
+                debug_print(f"任务{task_id}已被取消，终止执行。")
                 return
             ffmpeg_cmd = [
                 "ffmpeg",
@@ -262,24 +278,36 @@ def run_task_in_thread(task_id: int, absolute_output_folder: str, input_video_pa
             ffmpeg_proc = subprocess.Popen(
                 ffmpeg_cmd,
                 stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
+                stderr=subprocess.STDOUT,  # 合并 stderr 到 stdout
                 text=True,
                 encoding="utf-8",
                 errors="replace",
                 start_new_session=True,
+                bufsize=1,  # 行缓冲
+                universal_newlines=True,
             )
             _register_process(task_id, ffmpeg_proc)
-            ffmpeg_stdout, ffmpeg_stderr = ffmpeg_proc.communicate()
+
+            # 实时打印 FFmpeg 输出
+            ffmpeg_output = []
+            for line in iter(ffmpeg_proc.stdout.readline, ""):
+                if cancel_event.is_set() or (task and task.status == "failed"):
+                    print(f"任务{task_id}已被取消，终止 FFmpeg 进程。")
+                    ffmpeg_proc.terminate()
+                    break
+                if line.rstrip():
+                    print(f"[threeDGS][FFmpeg][{task_id}] {line.rstrip()}")
+                    ffmpeg_output.append(line.rstrip())
+            ffmpeg_proc.wait()
             _unregister_process(task_id, ffmpeg_proc)
             if cancel_event.is_set() or (task and task.status == "failed"):
-                print(f"任务{task_id}已被取消，终止执行。")
+                debug_print(f"任务{task_id}已被取消，终止执行。")
                 return
             if ffmpeg_proc.returncode != 0:
                 print(f"[threeDGS] ffmpeg failed rc={ffmpeg_proc.returncode}")
-                if ffmpeg_stderr:
-                    print(f"[threeDGS] ffmpeg stderr (tail):\n{ffmpeg_stderr[-2000:]}\n--- end stderr ---")
-                if ffmpeg_stdout:
-                    print(f"[threeDGS] ffmpeg stdout (tail):\n{ffmpeg_stdout[-2000:]}\n--- end stdout ---")
+                print("[threeDGS] 最后 10 行 FFmpeg 输出:")
+                for msg in ffmpeg_output[-10:]:
+                    print(f"[threeDGS]   {msg}")
                 task.status = "failed"
                 db.commit()
                 send_status_update(db, task)
@@ -333,39 +361,66 @@ def run_task_in_thread(task_id: int, absolute_output_folder: str, input_video_pa
         run_cwd = work_dir if os.path.isdir(work_dir) else None
         if convert_command:
             try:
+                debug_print(f"[threeDGS] 开始执行转换命令 (task_id={task_id}, algorithm={algorithm})")
+                debug_print(f"[threeDGS] 工作目录: {run_cwd}")
+                debug_print(f"[threeDGS] 转换命令: {convert_command}")
+                
+                # 检查输入目录状态
+                input_dir = os.path.join(absolute_output_folder, 'input')
+                if os.path.exists(input_dir):
+                    input_files = os.listdir(input_dir)
+                    debug_print(f"[threeDGS] 输入目录包含 {len(input_files)} 个文件")
+                    if len(input_files) > 0:
+                        debug_print(f"[threeDGS] 示例文件: {input_files[:3]}")
+                else:
+                    debug_print(f"[threeDGS] 警告：输入目录不存在: {input_dir}")
+                
                 # 特殊处理：GaussianPro 的 convert 需要 mask 目录
                 if algorithm == "gaussianpro":
                     os.makedirs(os.path.join(absolute_output_folder, "mask"), exist_ok=True)
                 if cancel_event.is_set() or (task and task.status == "failed"):
-                    print(f"任务{task_id}已被取消，终止执行。")
+                    debug_print(f"任务{task_id}已被取消，终止执行。")
                     return
                 convert_proc = subprocess.Popen(
                     convert_command,
                     shell=True,
                     stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,  # 合并 stderr 到 stdout
                     text=True,
                     encoding='utf-8',
                     errors='replace',
                     cwd=run_cwd,
                     start_new_session=True,
+                    bufsize=1,  # 行缓冲
+                    universal_newlines=True,
                 )
                 _register_process(task_id, convert_proc)
-                convert_stdout, convert_stderr = convert_proc.communicate()
+                
+                # 实时打印转换输出
+                convert_output = []
+                for line in iter(convert_proc.stdout.readline, ""):
+                    if cancel_event.is_set() or (task and task.status == "failed"):
+                        debug_print(f"任务{task_id}已被取消，终止转换进程。")
+                        convert_proc.terminate()
+                        break
+                    if line.rstrip():
+                        debug_print(f"[threeDGS][Convert][{task_id}] {line.rstrip()}")
+                        convert_output.append(line.rstrip())
+                convert_proc.wait()
                 _unregister_process(task_id, convert_proc)
                 if cancel_event.is_set() or (task and task.status == "failed"):
-                    print(f"任务{task_id}已被取消，终止执行。")
+                    debug_print(f"任务{task_id}已被取消，终止执行。")
                     return
                 if convert_proc.returncode != 0:
-                    print(f"[threeDGS] convert failed (algorithm={algorithm}) rc={convert_result.returncode}")
-                    if convert_stderr:
-                        print(f"[threeDGS] convert stderr (tail):\n{convert_stderr[-2000:]}\n--- end stderr ---")
-                    if convert_stdout:
-                        print(f"[threeDGS] convert stdout (tail):\n{convert_stdout[-2000:]}\n--- end stdout ---")
+                    debug_print(f"[threeDGS] convert failed (algorithm={algorithm}) rc={convert_proc.returncode}")
+                    debug_print(f"[threeDGS] 最后 10 行转换输出:")
+                    for msg in convert_output[-10:]:
+                        debug_print(f"[threeDGS]   {msg}")
                     task.status = "failed"
                     db.commit()
                     send_status_update(db, task)
                     return
+                debug_print(f"[threeDGS] 转换命令成功完成 (task_id={task_id})")
                 task.status = "converted"
                 db.commit()
                 send_status_update(db, task)
@@ -378,31 +433,44 @@ def run_task_in_thread(task_id: int, absolute_output_folder: str, input_video_pa
         # 4. 执行训练命令
         try:
             if cancel_event.is_set() or (task and task.status == "failed"):
-                print(f"任务{task_id}已被取消，终止执行。")
+                debug_print(f"任务{task_id}已被取消，终止执行。")
                 return
             train_proc = subprocess.Popen(
                 train_command,
                 shell=True,
                 stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
                 text=True,
                 encoding='utf-8',
                 errors='replace',
                 cwd=run_cwd,
                 start_new_session=True,
+                bufsize=1,
+                universal_newlines=True,
             )
             _register_process(task_id, train_proc)
-            train_stdout, train_stderr = train_proc.communicate()
+
+            # 实时打印训练输出
+            print(f"[threeDGS] 开始训练 (task_id={task_id})")
+            train_output = []
+            for line in iter(train_proc.stdout.readline, ""):
+                if cancel_event.is_set() or (task and task.status == "failed"):
+                    print(f"任务{task_id}已被取消，终止训练进程。")
+                    train_proc.terminate()
+                    break
+                if line.rstrip():
+                    print(f"[threeDGS][Train][{task_id}] {line.rstrip()}")
+                    train_output.append(line.rstrip())
+            train_proc.wait()
             _unregister_process(task_id, train_proc)
             if cancel_event.is_set() or (task and task.status == "failed"):
-                print(f"任务{task_id}已被取消，终止执行。")
+                debug_print(f"任务{task_id}已被取消，终止执行。")
                 return
             if train_proc.returncode != 0:
-                print(f"[threeDGS] train failed (algorithm={algorithm}) rc={train_result.returncode}")
-                if train_stderr:
-                    print(f"[threeDGS] train stderr (tail):\n{train_stderr[-2000:]}\n--- end stderr ---")
-                if train_stdout:
-                    print(f"[threeDGS] train stdout (tail):\n{train_stdout[-2000:]}\n--- end stdout ---")
+                print(f"[threeDGS] train failed (algorithm={algorithm}) rc={train_proc.returncode}")
+                print(f"[threeDGS] 最后 10 行训练输出:")
+                for msg in train_output[-10:]:
+                    print(f"[threeDGS]   {msg}")
                 task.status = "failed"
             else:
                 task.status = "trained"

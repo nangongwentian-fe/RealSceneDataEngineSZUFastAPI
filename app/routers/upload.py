@@ -7,6 +7,7 @@ from app.models.static_file import StaticFile as StaticFileModel
 from app.schemas.static_file import StaticFile
 from pathlib import Path
 import uuid
+import aiofiles  # 新增: 异步文件操作库
 
 router = APIRouter()
 
@@ -25,9 +26,18 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
     # 构建文件保存路径
     file_location = os.path.join(UPLOAD_DIRECTORY, unique_filename)
     
-    # 保存文件
-    with open(file_location, "wb") as f:
-        f.write(file.file.read())
+    # 以异步方式分块保存文件，避免一次性读入大文件导致内存暴涨
+    try:
+        async with aiofiles.open(file_location, "wb") as f:
+            chunk_size = 1024 * 1024  # 1MB
+            while True:
+                chunk = await file.read(chunk_size)
+                if not chunk:
+                    break
+                await f.write(chunk)
+    except Exception as err:
+        # 写文件失败时，返回 500 并中断后续数据库操作
+        raise HTTPException(status_code=500, detail=f"Failed to save file: {err}")
     
     # 保存文件信息到数据库，保存原始文件名和新文件名
     static_file = StaticFileModel(
